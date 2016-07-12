@@ -44,12 +44,11 @@ public class SnowmanFragment extends Fragment implements Callback<SnowmanDTO> {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ApiHelper.getApi().getSnowmen(-25.455906,-49.275269, 10000).enqueue(this);
-        mSnowmen = new ArrayList<>();
-
-//        if (getArguments() != null) {
-//            mSnowmen = (List<Snowman>) getArguments().getSerializable("snowmen");
-//        }
+        if (getArguments() != null) {
+            mSnowmen = (List<Snowman>) getArguments().getSerializable("snowmen");
+        } else {
+            mSnowmen = new ArrayList<>();
+        }
     }
 
     @Override
@@ -66,6 +65,16 @@ public class SnowmanFragment extends Fragment implements Callback<SnowmanDTO> {
             recyclerView.setAdapter(adapter);
         }
         return view;
+    }
+
+    public void updateSnowmen(List<Snowman> snowmen){
+        mSnowmen = snowmen;
+        if(adapter!=null) {
+            adapter.setValues(mSnowmen);
+            adapter.notifyDataSetChanged();
+        }else{
+            adapter = new SnowmanRecyclerViewAdapter(mSnowmen, getContext());
+        }
     }
 
     @Override

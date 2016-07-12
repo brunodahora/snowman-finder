@@ -3,7 +3,6 @@
     package="com.dahoraapps.snowmanfinder" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -19,6 +18,10 @@
         <meta-data
             android:name="AA_MODELS"
             android:value="com.dahoraapps.snowmanfinder.models.Snowman" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <activity
             android:name=".activities.MainActivity"
